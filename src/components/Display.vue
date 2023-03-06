@@ -1,7 +1,9 @@
 <template>
-  <div id="display">
-    <Item v-for="item in items" :item="item"
-          v-show="item.category === categoryState.category || categoryState.category === Category.ALL"/>
+  <div id="display" class="container-md text-center">
+    <div class="row g-2 g-lg-3 gap-3 m-1">
+      <Item v-for="item in filteredItems" :item="item" class="border rounded-1"/>
+    </div>
+
   </div>
 </template>
 
@@ -16,7 +18,15 @@ export default {
   components: {
     Item,
   },
+  computed: {
+    filteredItems() {
+      if (categoryState.category === Category.ALL) {
+        return this.items
+      }
 
+      return this.items.filter(i => i.category === categoryState.category)
+    }
+  },
   data() {
     return {
       categoryState,

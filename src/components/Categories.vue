@@ -1,6 +1,7 @@
 <template>
-  <div id="categories">
-    <ul>
+  <div id="categories" class="container-sm">
+    Category
+    <ul class="list-group pt-2 pb-2">
       <Category v-for="category in categories" :category="category"/>
     </ul>
   </div>
@@ -14,5 +15,7 @@
     components: {
       Category
     }
+
+
   }
 </script>

@@ -3,9 +3,9 @@
     <h1>Organizer</h1>
   </header>
   <main>
-    <div id="base-container">
-      <Categories :categories="Category" @apply_filer="apply_filer"/>
-      <Display :items="items"/>
+    <div id="base-container" class="container d-flex justify-content-center">
+      <Categories :categories="Category" @apply_filer="apply_filer" class="border rounded-start-1 w-auto"/>
+      <Display :items="items" class="border rounded-end-1"/>
     </div>
   </main>
 </template>
@@ -45,45 +45,33 @@ export default {
     text-align: center;
   }
 
-  #base-container {
-    display: flex;
-    flex-direction: row;
-    align-content: stretch;
-  }
+  /*#base-container {*/
+  /*  display: flex;*/
+  /*  flex-direction: row;*/
+  /*  align-content: stretch;*/
+  /*}*/
 
-  #base-container > div{
-    border: 2px solid gray;
-  }
+  /*#base-container > div{*/
+  /*  border: 2px solid gray;*/
+  /*}*/
 
-  #categories {
-    width: fit-content;
-    padding-right: 5px;
-    text-align: left;
-  }
+  /*#categories {*/
+  /*  width: fit-content;*/
+  /*  padding-right: 5px;*/
+  /*  text-align: left;*/
+  /*}*/
 
-  ul {
-    list-style: none;
-    margin-left: -30px;
-  }
+  /*#display {*/
+  /*  display: inline-flex;*/
+  /*  flex-direction: row;*/
+  /*  flex-wrap: wrap;*/
+  /*  align-items: start;*/
+  /*  min-width: 70%;*/
+  /*  min-height: 500px;*/
+  /*}*/
 
-  #display {
-    display: inline-flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: start;
-    min-width: 70%;
-    min-height: 500px;
-  }
-
-  #display div {
-    margin: 10px;
-    padding: 5px;
-    border: 1px solid green;
-    border-radius: 3px;
-  }
-
-  a {
-    text-decoration: none;
-    color: black;
-  }
+  /*a {*/
+  /*  text-decoration: none;*/
+  /*  color: black;*/
+  /*}*/
 </style>
