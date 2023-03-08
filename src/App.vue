@@ -4,7 +4,7 @@
   </header>
   <main>
     <div id="base-container" class="container d-flex justify-content-center">
-      <Categories :categories="Category" @apply_filer="apply_filer" class="border rounded-start-1 w-auto"/>
+      <Categories :categories="categories" @apply_filer="apply_filer" class="border rounded-start-1 w-auto"/>
       <Display :items="items" class="border rounded-end-1"/>
     </div>
   </main>
@@ -12,31 +12,30 @@
 
 <script>
 import Categories from '@/components/Categories.vue'
-import Display from "@/components/Display.vue";
-import Category from "@/categories"
+import Display from "@/components/Display.vue"
+
+import { set, keys, getAll } from "./api/idb.js";
 
 export default {
   data() {
     return {
-      items: [
-        {id: 1, title: 'Vue', path: 'https://vuejs.org/', category: Category.SITE},
-        {id: 2, title: 'Google', path: 'https://www.google.com/', category: Category.SITE},
-        {id: 3, title: 'Youtube', path: 'https://www.youtube.com/', category: Category.SITE},
-        {id: 4, title: 'VS Code', path: 'soon', category: Category.PROGRAM},
-        {id: 5, title: 'OSU', path: 'soon', category: Category.PROGRAM},
-      ],
-      Category
+      items: [],
+      categories: []
     }
   },
   components: {
     Categories,
     Display
   },
+  mounted() {
+    getAll('categories').then(cat => this.categories = cat)
+    getAll('items').then(items => this.items = items)
+  },
   methods: {
     apply_filer(category){
       alert(category)
     }
-  }
+  },
 }
 </script>
 

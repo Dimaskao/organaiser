@@ -1,10 +1,10 @@
 <template>
-  <li @click="apply_filer(category)" class="list-group-item list-group-item-action" :class="categoryState.category === category ? 'active' : ''">{{ category }}</li>
+<!--  <li @click="apply_filer(category)" class="list-group-item list-group-item-action" :class="categoryState.category === category ? 'active' : ''">{{ category.title }}</li>-->
+  <input type="radio" class="btn-check" name="vbtn-radio" :id="category.id" autocomplete="off">
+  <label @click="$emit('apply_filter')" class="btn btn-outline-primary" :for="category.id">{{category.title}}</label>
 </template>
 
 <script>
-import { categoryState } from '@/categoryState'
-import Category from "@/categories";
 
 export default {
   props: {
@@ -12,18 +12,7 @@ export default {
       type: Object,
       required: true
     }
-  },
-
-  data() {
-    return{
-      categoryState
-    }
-  },
-
-  methods: {
-    apply_filer(cat){
-      categoryState.category = cat
-    },
   }
+
 }
 </script>

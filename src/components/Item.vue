@@ -1,6 +1,6 @@
 <template>
-  <div class="col">
-    <div @click="goTo(item.path)" class="p-3">
+  <div @dblclick="goTo(item.path)" class="col">
+    <div class="p-3">
       {{item.title}}
     </div>
   </div>
@@ -14,9 +14,8 @@
         required: true
       }
     },
-
     methods: {
-      goTo(path){
+      goTo(path) {
         open(path)
       }
     }
