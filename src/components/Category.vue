@@ -1,10 +1,11 @@
 <template>
-<!--  <li @click="apply_filer(category)" class="list-group-item list-group-item-action" :class="categoryState.category === category ? 'active' : ''">{{ category.title }}</li>-->
-  <input type="radio" class="btn-check" name="vbtn-radio" :id="category.id" autocomplete="off">
+  <input type="radio" class="btn-check" name="vbtn-radio" :id="category.id" autocomplete="off" :checked="(selectedCategory.id === category.id)">
   <label @click="$emit('apply_filter')" class="btn btn-outline-primary" :for="category.id">{{category.title}}</label>
 </template>
 
 <script>
+
+import {selectedCategory} from "../selectedCategory";
 
 export default {
   emits: ['apply_filter'],
@@ -12,6 +13,11 @@ export default {
     category: {
       type: Object,
       required: true
+    }
+  },
+  data() {
+    return {
+      selectedCategory,
     }
   }
 

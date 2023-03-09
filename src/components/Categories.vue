@@ -5,11 +5,8 @@
       <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addCategoryForm" @click="isEdit=false">New</button>
       <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addCategoryForm" :disabled="selectedCategory.id === -1" @click="isEdit=true">Edit</button>
     </div>
-<!--    <ul class="list-group pt-2 pb-2">-->
-<!--      <Category v-for="category in categories" :category="category"/>-->
-<!--    </ul>-->
     <div class="btn-group-vertical pt-1 pb-1" role="group" aria-label="Vertical radio toggle button group">
-      <input @click="apply_filer(-1)" type="radio" class="btn-check" name="vbtn-radio" id="-1" autocomplete="off" checked>
+      <input @click="apply_filer(-1)" type="radio" class="btn-check" name="vbtn-radio" id="-1" autocomplete="off" :checked="selectedCategory.id === -1">
       <label class="btn btn-outline-primary" for="-1">All</label>
       <Category @apply_filter="apply_filer(category.id)" v-for="category in categories" :category="category"/>
     </div>
