@@ -7,6 +7,7 @@
 <script>
 
 export default {
+  emits: ['apply_filter'],
   props: {
     category: {
       type: Object,

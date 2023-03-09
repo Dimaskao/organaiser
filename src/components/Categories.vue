@@ -2,8 +2,8 @@
   <div id="categories" class="container-sm">
     Category<br>
     <div class="btn-group btn-group-sm pt-2" role="group">
-      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addCategoryForm">New</button>
-      <button type="button" class="btn btn-secondary" :disabled="selectedCategory.id === -1">Edit</button>
+      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addCategoryForm" @click="isEdit=false">New</button>
+      <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#addCategoryForm" :disabled="selectedCategory.id === -1" @click="isEdit=true">Edit</button>
     </div>
 <!--    <ul class="list-group pt-2 pb-2">-->
 <!--      <Category v-for="category in categories" :category="category"/>-->
@@ -13,7 +13,7 @@
       <label class="btn btn-outline-primary" for="-1">All</label>
       <Category @apply_filter="apply_filer(category.id)" v-for="category in categories" :category="category"/>
     </div>
-    <AddCategoryForm :categories="categories"/>
+    <AddCategoryForm @updateCategories="updateCategories()" :categories="categories" :isEdit="isEdit" :id="selectedCategory.id"/>
   </div>
 </template>
 
@@ -24,21 +24,24 @@
 
   export default {
     props: ['categories'],
-
     components: {
       Category,
       AddCategoryForm
     },
     data() {
       return {
-        isEnable: true,
         selectedCategory,
+        isEdit: false,
       }
     },
     methods: {
       apply_filer(catId){
         selectedCategory.id = catId
       },
+      updateCategories() {
+        selectedCategory.id = -1
+        this.$emit('updateCategories')
+      }
     }
 
 

@@ -4,7 +4,7 @@
   </header>
   <main>
     <div id="base-container" class="container d-flex justify-content-center">
-      <Categories :categories="categories" @apply_filer="apply_filer" class="border rounded-start-1 w-auto"/>
+      <Categories @updateCategories="updateCategories" :categories="categories" class="border rounded-start-1 w-auto"/>
       <Display :items="items" class="border rounded-end-1"/>
     </div>
   </main>
@@ -32,10 +32,10 @@ export default {
     getAll('items').then(items => this.items = items)
   },
   methods: {
-    apply_filer(category){
-      alert(category)
+    updateCategories() {
+      getAll('categories').then(cat => this.categories = cat)
     }
-  },
+  }
 }
 </script>
 

@@ -28,7 +28,6 @@ export default {
   },
   computed: {
     filteredItems() {
-      console.log(selectedCategory.id)
       if (selectedCategory.id === -1) {
         return this.items
       }

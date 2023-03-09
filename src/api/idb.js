@@ -1,4 +1,6 @@
-import { openDB } from 'idb'
+//import { openDB } from 'idb'
+import { openDB } from 'idb/with-async-ittr'
+
 const dbPromise = openDB('organiser', 1, {
     upgrade(db) {
         db.createObjectStore('categories', {keyPath: 'id', autoIncrement: true,}).put({title: 'Site'});
@@ -19,7 +21,25 @@ async function keys() {
 }
 async function getAll(storeName) {
     return (await dbPromise).getAll(storeName);
-
 }
 
-export { get, set, keys, getAll }
+async function remove(storeName, key) {
+    return (await dbPromise).delete(storeName, key);
+}
+
+async function updateCategory(storeName, key, title) {
+
+    const tx = (await dbPromise).transaction(storeName, 'readwrite');
+
+    for await (const cursor of tx.store) {
+        if (cursor.value.id === key) {
+            const cat = {...cursor.value}
+            cat.title = title
+            cursor.update(cat)
+        }
+    }
+
+    await tx.done;
+}
+
+export { get, set, keys, getAll, remove, updateCategory }
