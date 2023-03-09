@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { set, remove, updateCategory } from "@/api/idb"
+import { set, remove, updateCategory, getAll } from "@/api/idb"
 export default {
   props:['categories', 'isEdit', 'id'],
   data() {
@@ -62,9 +62,21 @@ export default {
       }
     },
     deleteCategory() {
-      remove('categories', this.id).then(() => {
-        this.$emit('updateCategories')
-        document.getElementById('btn-close').click()
+      let canBeRemove = true
+      getAll('items').then(items => {
+        items.forEach(item => {
+          if (item.categoryId === this.id) {
+            canBeRemove = false
+            alert('Move or remove items from this category before deleting')
+            return
+          }
+        })
+        if (canBeRemove) {
+          remove('categories', this.id).then(() => {
+            this.$emit('updateCategories')
+            document.getElementById('btn-close').click()
+          })
+        }
       })
     }
   }

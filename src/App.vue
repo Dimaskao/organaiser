@@ -5,7 +5,7 @@
   <main>
     <div id="base-container" class="container d-flex justify-content-center">
       <Categories @updateCategories="updateCategories" :categories="categories" class="border rounded-start-1 w-auto"/>
-      <Display :items="items" class="border rounded-end-1"/>
+      <Display @updateItems="updateItems" :items="items" class="border rounded-end-1"/>
     </div>
   </main>
 </template>
@@ -34,6 +34,9 @@ export default {
   methods: {
     updateCategories() {
       getAll('categories').then(cat => this.categories = cat)
+    },
+    updateItems() {
+      getAll('items').then(it => this.items = it)
     }
   }
 }

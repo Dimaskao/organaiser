@@ -42,4 +42,21 @@ async function updateCategory(storeName, key, title) {
     await tx.done;
 }
 
-export { get, set, keys, getAll, remove, updateCategory }
+async function updateItem(storeName, it) {
+
+    const tx = (await dbPromise).transaction(storeName, 'readwrite');
+
+    for await (const cursor of tx.store) {
+        if (cursor.value.id === it.id) {
+            const item = {...cursor.value}
+            item.title = it.title
+            item.path = it.path
+            item.categoryId = it.categoryId
+            cursor.update(item)
+        }
+    }
+
+    await tx.done;
+}
+
+export { get, set, keys, getAll, remove, updateCategory, updateItem }
